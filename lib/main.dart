@@ -35,11 +35,27 @@ _expression = '';
 _display = '';
 } else if (value == '=') {
 _evaluate();
+} else if (value == 'x²') {
+_square();
 } else {
 _expression += value;
 _display = _expression;
 }
+
+
 });
+}
+
+void _square() {
+final current = double.tryParse(_expression);
+if (current == null) {
+_display = 'Error';
+_expression = '';
+return;
+}
+final result = current * current;
+_display = '$_expression² = $result';
+_expression = result.toString();
 }
 
 void _evaluate() {
@@ -65,10 +81,11 @@ child: Text(label, style: const TextStyle(fontSize: 20)),
 @override
 Widget build(BuildContext context) {
 final buttons = [
-'7', '8', '9', '/',
-'4', '5', '6', '*',
-'1', '2', '3', '-',
-'C', '0', '=', '+',
+  '7', '8', '9', '/',
+  '4', '5', '6', '*',
+  '1', '2', '3', '-',
+  'C', '0', '=', '+',
+  'x²',
 ];
 return Scaffold(
 appBar: AppBar(title: const Text("Edrees's Calculator")),
